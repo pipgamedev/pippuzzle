@@ -2,11 +2,282 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing">
-  <title>Redirecting to Pip Puzzle press kit</title>
-  <script>window.location.href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pip Puzzle - Press Kit</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 60px;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .press-button {
+      display: inline-block;
+      background: white;
+      color: #667eea;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .press-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      animation: fadeIn 0.8s ease-out 0.2s both;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: white;
+    }
+
+    .card-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #667eea;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .card-link {
+      display: inline-block;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .card-link:hover {
+      color: #764ba2;
+    }
+
+    .card.tall {
+      grid-row: span 2;
+    }
+
+    .card.wide {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .masonry {
+        grid-template-columns: 1fr;
+      }
+
+      .card.tall,
+      .card.wide {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      margin-top: 60px;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    .full-drive-link {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .full-drive-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting to the Pip Puzzle press kit... <a href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing">Click here</a> if you're not redirected.</p>
+  <div class="container">
+    <header>
+      <h1>🎮 Pip Puzzle</h1>
+      <p class="tagline">A delightful puzzle game experience</p>
+      <a href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing" class="press-button">Full Press Kit</a>
+    </header>
+
+    <div class="masonry">
+      <div class="card">
+        <div class="card-image">🎯</div>
+        <div class="card-content">
+          <h3>About the Game</h3>
+          <p>Pip Puzzle is an engaging puzzle game designed to challenge your mind and provide hours of entertainment.</p>
+          <a href="#" class="card-link">Learn more →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">📸</div>
+        <div class="card-content">
+          <h3>Screenshots</h3>
+          <p>Explore beautiful gameplay visuals and user interface designs that showcase the game's polish.</p>
+          <a href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing" class="card-link">View gallery →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">⬇️</div>
+        <div class="card-content">
+          <h3>Download</h3>
+          <p>Get Pip Puzzle on your favorite platform. Available on multiple stores.</p>
+          <a href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing" class="card-link">Download now →</a>
+        </div>
+      </div>
+
+      <div class="card tall">
+        <div class="card-image">🎨</div>
+        <div class="card-content">
+          <h3>Media Assets</h3>
+          <p>High-resolution logos, artwork, and promotional materials ready for press use.</p>
+          <p>Access all official assets from our complete media library.</p>
+          <a href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing" class="card-link">Browse assets →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">👥</div>
+        <div class="card-content">
+          <h3>About Studio</h3>
+          <p>Meet the talented team behind Pip Puzzle. Learn about our creative process and vision.</p>
+          <a href="#" class="card-link">Our story →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">📧</div>
+        <div class="card-content">
+          <h3>Press Contact</h3>
+          <p>For press inquiries, reviews, or collaboration opportunities, reach out to us.</p>
+          <a href="mailto:press@pippuzzle.com" class="card-link">Contact us →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🏆</div>
+        <div class="card-content">
+          <h3>Awards & Recognition</h3>
+          <p>Celebrating the achievements and recognition Pip Puzzle has received from the community.</p>
+          <a href="#" class="card-link">See highlights →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">📰</div>
+        <div class="card-content">
+          <h3>Press Materials</h3>
+          <p>Complete press release templates, factsheets, and promotional content for media outlets.</p>
+          <a href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=sharing" class="card-link">Access materials →</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2024 Pip Puzzle. All rights reserved.</p>
+    </footer>
+  </div>
 </body>
 </html>
