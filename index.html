@@ -51,6 +51,10 @@
     transform: translateX(-130%) skewX(-14deg);
   }
   .slash-reveal.in-view::after{ animation: titleSlash .5s cubic-bezier(.6,0,.2,1) both calc(.12s + var(--rd, 0s)); }
+  /* Re-wrapped lines that were already revealed before a resize: land in their final state
+     instantly instead of replaying the fade/slash entrance on text the visitor already read. */
+  .slash-reveal.no-anim{ transition:none; }
+  .slash-reveal.no-anim::after{ animation:none; }
   @keyframes titleSlash{
     0%{ transform: translateX(-130%) skewX(-14deg); }
     50%{ transform: translateX(0%) skewX(-14deg); }
@@ -154,6 +158,13 @@
   .gallery-caption{ font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; line-height:1.5; }
   .col-right .gallery-item:nth-child(1){ --rd: 0s; }
   .col-right .gallery-item:nth-child(2){ --rd: .08s; }
+  .twitter-block{
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px;
+    background: #fff;
+  }
+  .twitter-block .twitter-timeline{ display:block; }
 
   .mini-gallery{
     display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
@@ -421,6 +432,8 @@
   .feature-grid > div:nth-child(2){ --rd: .06s; }
   .feature-grid > div:nth-child(3){ --rd: .12s; }
   .feature-grid > div:nth-child(4){ --rd: .18s; }
+  .feature-grid > div:nth-child(5){ --rd: .24s; }
+  .feature-grid > div:nth-child(6){ --rd: .3s; }
   .feature-title{
     font-family: var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:0.01em;
     font-size: 16px; color: var(--ink); margin-bottom: 6px; display:flex; align-items:center; gap:8px;
@@ -431,6 +444,8 @@
   .feature-grid > div:nth-child(2) .feature-title::before{ background: var(--amber); }
   .feature-grid > div:nth-child(3) .feature-title::before{ background: var(--magenta); }
   .feature-grid > div:nth-child(4) .feature-title::before{ background: var(--violet); }
+  .feature-grid > div:nth-child(5) .feature-title::before{ background: var(--rose); }
+  .feature-grid > div:nth-child(6) .feature-title::before{ background: var(--coral); }
   .feature-desc{ font-size: 13px; color: var(--ink-soft); line-height:1.6; }
 
   /* ---- Roster section ---- */
@@ -527,7 +542,7 @@
     border-radius:8px; overflow:hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
     max-height:94vh;
   }
-  .char-modal__card{ max-width:1240px; display:flex; }
+  .char-modal__card{ max-width:1680px; display:flex; }
   .stage-modal__card{ max-width:1400px; overflow-y:auto; scrollbar-width:none; }
   .stage-modal__card::-webkit-scrollbar{ display:none; }
   .char-modal__close, .stage-modal__close{
@@ -539,8 +554,8 @@
   }
   .char-modal__close:hover, .stage-modal__close:hover{ background: rgba(164,32,149,0.6); }
   .char-modal__visual{
-    position:relative; width:58%; flex-shrink:0; overflow:hidden;
-    background: var(--panel-dark-deep); min-height:76vh;
+    position:relative; width:70%; flex-shrink:0; overflow:hidden;
+    background: var(--panel-dark-deep); min-height:88vh;
   }
   .char-modal__stage{
     position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
@@ -551,11 +566,11 @@
     background: linear-gradient(0deg, rgba(13,6,19,0.55), rgba(13,6,19,0.05) 55%);
   }
   .char-modal__portrait{
-    position:absolute; left:50%; bottom:0; transform:translateX(-50%);
-    max-height:96%; max-width:92%; object-fit:contain;
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:contain; object-position:center bottom;
   }
   .char-modal__info{
-    flex:1; padding: 32px 44px; overflow-y:auto;
+    flex:1; min-width:320px; padding: 32px 40px; overflow-y:auto;
     display:flex; flex-direction:column; justify-content:flex-start;
   }
   .char-modal__info .ff-name{ font-size:34px; }
@@ -584,9 +599,13 @@
     border-left:3px solid var(--violet); border-radius:0 3px 3px 0;
   }
   .char-modal__tips p{ font-size:13px; line-height:1.65; color: var(--ink-soft); font-style:italic; }
-  .char-modal__stat-boxes{ display:grid; gap:10px; margin-top:26px; }
+  .char-modal__stat-boxes{
+    display:grid; gap:0; margin: 26px -44px -32px;
+    border-top:1.5px solid var(--line); border-left:1.5px solid var(--line);
+  }
   .char-modal__stat-box{
-    border:1.5px solid var(--line); border-radius:4px; padding:10px 12px;
+    border-right:1.5px solid var(--line); border-bottom:1.5px solid var(--line);
+    padding:10px 12px;
     display:flex; flex-direction:column; gap:6px; min-width:0;
   }
   .char-modal__stat-box-head{ display:flex; align-items:center; gap:7px; min-width:0; }
@@ -720,6 +739,8 @@
     .char-modal__card{ flex-direction:column; max-height:94vh; overflow-y:auto; }
     .char-modal__visual{ width:100%; min-height:0; height:50vh; }
     .char-modal__portrait{ max-height:88%; }
+    .char-modal__stat-boxes{ display:flex; flex-wrap:wrap; }
+    .char-modal__stat-box{ flex:1 1 33.3333%; }
     .contact-full{ flex-direction:column; padding: 44px 24px; gap: 30px; }
     .contact-full .right{ width:100%; }
     footer{ padding: 36px 24px 24px; }
@@ -767,6 +788,7 @@
         </a>
 
         <div class="hero-nav-links">
+          <a href="#story">About</a>
           <a href="#menu">Characters</a>
           <a href="#stages">Stages</a>
           <a href="#contact" class="cta">Contact</a>
@@ -873,6 +895,14 @@
             <div class="feature-title">A lot of animation</div>
             <div class="feature-desc">Every character has hundreds to thousands of frames of animation to make the game not only a joy to play, but also to look at. Have fun watching your friend smoothly get crushed by the moon because you did a bit of trolling with the monochromia skill!</div>
           </div>
+          <div class="reveal">
+            <div class="feature-title">Online Multiplayer</div>
+            <div class="feature-desc">Gaming is better with friends. Destroy those friendships online (or off!) and show how much of a puzzle master you are!</div>
+          </div>
+          <div class="reveal">
+            <div class="feature-title">Moddable</div>
+            <div class="feature-desc">Feeling creative? Why not create your own character or stage? Experiment with new action skills with the purpose-built scripting language, or import your original character (do not steal).</div>
+          </div>
         </div>
       </div>
 
@@ -885,6 +915,12 @@
         <div class="gallery-item reveal">
           <img src="assets/PressKit/ss3.jpg" alt="A quiet moment on the windmill stage, before the fight breaks out">
           <div class="gallery-caption">An earlier atmosphere of Peacetime Prairies</div>
+        </div>
+
+        <div class="side-block twitter-block reveal">
+          <div class="side-label">Latest on X</div>
+          <a class="twitter-timeline" data-theme="light" data-height="420" data-chrome="noheader nofooter noborders transparent" data-link-color="#F66942" href="https://twitter.com/PipPuzzle?ref_src=twsrc%5Etfw">Tweets by @PipPuzzle</a>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
       </div>
 
@@ -1160,7 +1196,12 @@
     function splitIntoLines(el){
       var rd0 = parseFloat(el.getAttribute('data-slash-lines')) || 0;
       var step = parseFloat(el.getAttribute('data-slash-step')) || .08;
-      var words = el.textContent.trim().split(/\s+/);
+      /* Cache the original sentence on first split: the rebuilt markup below joins each
+         line's words with a single space but has no space between lines (a <br> contributes
+         none to textContent), so re-splitting from a live textContent read would glue
+         adjacent lines' words together on every subsequent call (e.g. on resize). */
+      if(el.dataset.slashText === undefined) el.dataset.slashText = el.textContent.trim();
+      var words = el.dataset.slashText.split(/\s+/);
       el.textContent = '';
       var probes = words.map(function(w){
         var s = document.createElement('span');
@@ -1211,9 +1252,14 @@
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(function(){
             lineHosts.forEach(function(el){
-              if(el.querySelector('.slash-line.in-view')) return;
+              /* Re-wrap for the new width even if already revealed, so lines don't stay
+                 stuck with stale word groupings; just skip re-animating ones already shown. */
+              var wasRevealed = !!el.querySelector('.slash-line.in-view');
               splitIntoLines(el);
-              el.querySelectorAll('.slash-line').forEach(function(span){ io.observe(span); });
+              el.querySelectorAll('.slash-line').forEach(function(span){
+                if(wasRevealed) span.classList.add('in-view', 'no-anim');
+                else io.observe(span);
+              });
             });
           }, 200);
         });
@@ -1752,25 +1798,25 @@
   /* ---- Stage modal ---- */
   var STAGES = {
     peacetimeprairies: { name:'Peacetime Prairies', image:'assets/PressKit/Stages_PeacetimePrairies_B5.gif',
-      desc:"Rolling fields and a windmill that's seen better days. Deceptively calm, right up until the first chain lands." },
+      desc:"Rolling fields of crops and a windmill that's seen better days The first stage is a nice, peaceful place—at least for now." },
     lunalobby: { name:'Luna Lobby', image:'assets/PressKit/Stages_LunaLobby_0.9_C6.gif',
-      desc:"A moonlit waiting room for something that never arrives. Ooma likes it here." },
+      desc:"A mysterious lunar temple set just outside of the Sea of Tranquility in the Marsh of Sleep. Just standing here feels like time passes by twice as fast." },
     barnaclebay: { name:'Barnacle Bay', image:'assets/PressKit/Stages_BarnacleBay_0.1_B8.png',
-      desc:"Salt air, loose planks, and just enough sea spray to make footing interesting." },
+      desc:"A dark, forgotten grotto haunted by a thin cresent moon and ships that feel like they've been there frozen in-place for eons." },
     fortressfleet: { name:'Fortress Fleet', image:'assets/PressKit/Stages_FortressFleet_0.7_B5.png',
-      desc:"A skyline built for looking impressive from a distance. Lance treats it like a stage — because it is one." },
-    basketbazaar: { name:'Basket Bazaar', image:'assets/PressKit/Stages_BaskedBazaar0-9.png',
-      desc:"Stalls, crates, and more hiding spots than a market should reasonably have." },
+      desc:"A monolith of a fortress set in the sky, with clouds flying past." },
+    basketbazaar: { name:'Basked Bazaar', image:'assets/PressKit/Stages_BaskedBazaar0-9.png',
+      desc:"A high-tech almost-dystopian mega-city, surrounded by bazaars flooded with crude oil and basked under the increasingly oppressive heat of the sun overhead." },
     ascendedasylum: { name:'Ascended Asylum', image:'assets/PressKit/Stages_AscendedAsylum_0.1_D2.png',
-      desc:"Nobody agrees on what happened here. Everyone agrees it's a bad place for a rematch." },
+      desc:"A place long above everythingg, with a weird presence; like something is there." },
     chargechambers: { name:'Charge Chambers', image:'assets/PressKit/Stages_ChargeChambers_0.1_B1.png',
-      desc:"Industrial, loud, and built to survive a wrecking ball. Mostly." },
+      desc:"The inside of a twin-set of broken, malfunctioning cannons." },
     icyexcavation: { name:'Icy Excavation', image:'assets/PressKit/Stages_IcyExcavation_0.1_C8.png',
-      desc:"Frozen mid-dig, tools still where they were dropped. Dr. Tick calls it ‘inspiring.’" },
+      desc:"An excavation site, long-frozen in time. Tools are still where they were dropped. A heat far down in the cavern is slowly climbing, ready to erupt and take everything above it." },
     botanicalboardwalks: { name:'Botanical Boardwalks', image:'assets/PressKit/Stages_BotanicalBoardwalks_0.1_B2.png',
-      desc:"Wooden paths through an overgrown garden that stopped waiting for a gardener." },
+      desc:"Wooden paths interweve through this spacial garden, where gravity is long-forgotten and the environmental regulation system is long from maintained, littering ice everywhere." },
     dystokia: { name:'Dystokia', image:'assets/PressKit/Stages_Dystokia_0.6_D3.png',
-      desc:"Nobody's entirely sure where this one is. It's better that way." }
+      desc:"A dystopian Tokyo, where no-one remembers anything—especially when the smog comes in. The rain is a brief reprieve from the omnipresent smog that haunts the stage. Though Mt Fuji looms over the mega-city, even this has been bent to the will of whoever directs this mega-city." }
   };
   var stageKeys = Object.keys(STAGES);
 
