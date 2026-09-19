@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Pip Puzzle Press Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Anton&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --font-display:'Anton','Impact',sans-serif;
+    --violet:#773CA6; --magenta:#A42095; --rose:#CA3973; --coral:#F66942; --amber:#FEA545;
+    --panel-dark:#1D0E2B; --panel-dark-deep:#0D0613;
+    --paper:#191724; --ink:#DDD; --ink-soft:#8E7A98;
+    --page-bg:#120818; --line:#E3D8ED;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif; color:var(--ink); background:var(--page-bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  section{scroll-margin-top:26px;}
+
+  /* ---- Top bar ---- */
+  .topbar{
+    display:flex; align-items:center; justify-content:flex-end;
+    padding:18px 44px; background:var(--panel-dark-deep); color:#fff;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .topbar-tag{ font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .topbar-right{ display:flex; align-items:center; gap:18px; }
+  .topbar-dl{
+    font-size:12.5px; font-weight:600; color:#fff; text-decoration:none;
+    border:1.5px solid rgba(255,255,255,0.3); padding:8px 16px; border-radius:3px;
+    display:flex; align-items:center; gap:8px; transition:border-color .2s,background .2s;
+  }
+  .topbar-dl:hover{ border-color:var(--amber); background:rgba(254,165,69,0.1); }
+
+  /* ---- Hero ---- */
+  .hero{
+    position:relative; overflow:hidden;
+    padding: 84px 44px 130px;
+    background-image:
+      radial-gradient(circle at 15% 15%, rgba(164,32,149,0.35) 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, rgba(119,60,166,0.35) 0%, transparent 50%),
+      linear-gradient(160deg, rgba(29,14,43,0.82) 0%, rgba(13,6,19,0.88) 100%),
+      url('assets/PressKit/Dystokia1.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:auto, auto, auto, cover;
+    color:#fff; text-align:center;
+  }
+  .hero-title{ margin-top:0; width:100%; max-width:560px; height:auto; margin-left:auto; margin-right:auto; }
+  .hero-sub{ margin:20px auto 0; max-width:480px; font-size:14.5px; line-height:1.75; color:rgba(255,255,255,0.75); }
+  .hero-badges{ margin-top:30px; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
+  .hero-badge{
+    display:flex; align-items:center; justify-content:center;
+    width:48px; height:48px; border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.25); color:#fff; text-decoration:none;
+    transition:border-color .2s, transform .15s cubic-bezier(.34,1.56,.64,1), background .2s;
+  }
+  .hero-badge:hover{ border-color:var(--coral); background:rgba(246,105,66,0.12); transform:translateY(-2px); }
+  .hero-badge svg{ width:19px; height:19px; }
+
+  /* ---- Layout: side nav + content ---- */
+  .layout{ max-width:1180px; margin:0 auto; display:flex; gap:56px; padding:96px 44px 0; }
+  .side{ width:216px; flex-shrink:0; position:sticky; top:24px; align-self:flex-start; }
+  .side-logo{ margin-bottom:24px; }
+  .side-logo img{ width:100%; height:auto; }
+  .side-card{
+    background:#191724; border:1px solid var(--line); border-radius:6px; padding:22px 20px; margin-bottom:24px;
+  }
+  .side-card .k{ font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); }
+  .side-card .v{ font-size:14px; font-weight:600; margin-top:3px; }
+  .side-card .v + .k{ margin-top:14px; }
+  .side-nav{ display:flex; flex-direction:column; gap:2px; }
+  .side-nav a{
+    font-size:13px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+    padding:9px 12px; border-radius:0 4px 4px 0; border-left:2px solid transparent;
+    transition:color .15s, border-color .15s, background .15s;
+  }
+  .side-nav a:hover{ color:var(--ink); background:var(--paper); border-left-color:var(--coral); }
+  .side-nav a.active{ color:var(--coral); font-weight:600; background:var(--paper); border-left-color:var(--coral); }
+
+  .side-social{ margin-top:24px; }
+  .side-social-label{ font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px; }
+  .side-social-row{ display:flex; gap:8px; }
+  .side-social-row a{
+    width:36px; height:36px; border-radius:50%; flex-shrink:0;
+    border:1.5px solid var(--line); color:var(--ink-soft); text-decoration:none;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .2s, color .2s;
+  }
+  .side-social-row a:hover{ border-color:var(--coral); color:var(--coral); }
+  .side-social-row i{ font-size:14px; }
+
+  .side-close{ display:none; }
+  .side-backdrop{ display:none; }
+  .topbar-toggle{
+    display:none; width:36px; height:36px; border-radius:50%; flex-shrink:0;
+    border:1.5px solid rgba(255,255,255,0.35); background:transparent; color:#fff;
+    align-items:center; justify-content:center; cursor:pointer;
+  }
+  .topbar-toggle svg{ width:16px; height:16px; }
+
+  .content{ flex:1; min-width:0; padding-bottom:90px; }
+  .block{ padding-bottom:56px; margin-bottom:56px; border-bottom:1px solid var(--line); }
+  .block:last-child{ border-bottom:none; }
+  ::selection{ background:var(--coral); color:#fff; }
+  .block h2{ font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:0.01em; font-size:30px; margin-top:8px; }
+  .block > p.lede{ margin-top:12px; font-size:14px; line-height:1.75; color:var(--ink-soft); max-width:640px; }
+
+  /* Quick facts */
+  .facts-grid{ margin-top:28px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  .fact{ background:#191724; padding:16px 18px; }
+  .fact .k{ font-size:10.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); }
+  .fact .v{ font-size:14.5px; font-weight:600; margin-top:5px; line-height:1.4; }
+
+  /* Request copy */
+  .request-box{
+    margin-top:26px; background:linear-gradient(120deg,var(--panel-dark) 0%,#2A1440 100%);
+    border-radius:8px; padding:34px 36px; color:#fff;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .request-box p{ font-size:13px; color:rgba(255,255,255,0.65); margin-top:6px; max-width:360px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--coral); color:#fff; text-decoration:none; font-weight:600; font-size:13.5px;
+    padding:13px 22px; border-radius:4px; border:1.5px solid transparent; cursor:pointer;
+    transition:background .2s, transform .15s cubic-bezier(.34,1.56,.64,1);
+    font-family:'Inter',sans-serif;
+  }
+  .btn:hover{ background:var(--rose); }
+  .btn:active{ transform:scale(0.97); }
+  .btn.secondary{ background:transparent; border-color:rgba(255,255,255,0.35); }
+  .btn.secondary:hover{ background:rgba(255,255,255,0.1); }
+  .btn.outline{ background:transparent; border-color:var(--violet); color:var(--violet); }
+  .btn.outline:hover{ background:var(--violet); color:#fff; }
+  .req-form{ margin-top:22px; display:flex; gap:10px; flex-wrap:wrap; max-width:520px; }
+  .req-form input{
+    flex:1; min-width:180px; font-family:'Inter',sans-serif; font-size:13.5px;
+    padding:11px 14px; border-radius:4px; border:1.5px solid var(--line); background:#191724; color:var(--ink);
+  }
+  .req-form input:focus{ outline:none; border-color:var(--violet); }
+  .req-note{ margin-top:10px; font-size:11.5px; color:var(--ink-soft); }
+
+  /* Logo + icon */
+  .logo-row{ margin-top:26px; display:flex; gap:18px; flex-wrap:wrap; }
+  .logo-card{
+    flex:1 1 260px; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#191724;
+  }
+  .logo-card .swatch{ padding:36px; display:flex; align-items:center; justify-content:center; min-height:150px; }
+  .logo-card.on-dark .swatch{ background:var(--panel-dark-deep); }
+  .logo-card.on-light .swatch{ background:var(--line); }
+  .logo-card .swatch img{ max-height:96px; width:auto; }
+  .logo-card footer{ padding:12px 16px; font-size:12px; color:var(--ink-soft); border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+  .logo-card footer a{ color:var(--coral); font-weight:600; text-decoration:none; }
+
+  /* Trailers */
+  .trailer-grid{ margin-top:26px; display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .trailer-card{
+    position:relative; border-radius:6px; overflow:hidden; cursor:pointer; border:1px solid var(--line);
+    background:#000; aspect-ratio:16/9;
+  }
+  .trailer-card img{ width:100%; height:100%; object-fit:cover; opacity:0.86; transition:opacity .2s, transform .4s cubic-bezier(.16,1,.3,1); }
+  .trailer-card:hover img{ opacity:1; transform:scale(1.03); }
+  .trailer-card .play{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  }
+  .trailer-card .play span{
+    width:46px; height:46px; border-radius:50%; background:rgba(13,6,19,0.55); border:1.5px solid rgba(255,255,255,0.75);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .trailer-card .play svg{ width:16px; height:16px; margin-left:2px; }
+  .trailer-card .cap{
+    position:absolute; left:0; right:0; bottom:0; padding:10px 12px;
+    background:linear-gradient(0deg,rgba(13,6,19,0.9),transparent);
+    color:#fff; font-size:12.5px; font-weight:600;
+  }
+
+  /* Screenshots */
+  .shot-grid{ margin-top:26px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .shot-grid img{ width:100%; height:150px; object-fit:cover; border-radius:4px; cursor:zoom-in; transition:opacity .2s; }
+  .shot-grid img:hover{ opacity:0.9; }
+  .shot-grid img.px-art{ image-rendering:pixelated; image-rendering:-moz-crisp-edges; image-rendering:crisp-edges; }
+  .shot-caption{ margin-top:10px; font-size:12px; color:var(--ink-soft); }
+
+  /* Press & accolades */
+  .accolade{
+    margin-top:22px; display:flex; gap:14px; align-items:flex-start;
+    border:1px solid var(--line); border-radius:6px; padding:18px 20px; background:#191724;
+  }
+  .accolade i{ color:var(--amber); font-size:18px; margin-top:2px; }
+  .accolade .t{ font-weight:600; font-size:14px; }
+  .accolade .d{ font-size:12.5px; color:var(--ink-soft); margin-top:3px; }
+  .quote-empty{
+    margin-top:16px; border:1.5px dashed var(--line); border-radius:6px; padding:20px 22px;
+    font-size:13px; color:var(--ink-soft); font-style:italic;
+  }
+
+  /* About */
+  .about-row{ margin-top:22px; display:flex; gap:32px; flex-wrap:wrap; align-items:flex-start; }
+  .about-row p{ flex:1 1 380px; font-size:14px; line-height:1.8; color:var(--ink-soft); }
+  .stat-card{
+    flex:0 0 220px; border:1px solid var(--line); border-radius:6px; padding:18px 20px; background:#191724;
+  }
+  .stat-card li{ list-style:none; font-size:13px; display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px solid var(--line); color:var(--ink-soft); }
+  .stat-card li:last-child{ border-bottom:none; }
+  .stat-card li b{ color:var(--ink); font-weight:600; }
+
+  /* Additional links */
+  .link-grid{ margin-top:26px; display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .link-item{
+    display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:6px;
+    padding:14px 16px; text-decoration:none; color:var(--ink); background:#191724;
+    transition:border-color .2s, transform .15s;
+  }
+  .link-item:hover{ border-color:var(--coral); transform:translateY(-2px); }
+  .link-item i{ width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--paper); color:var(--coral); flex-shrink:0; }
+  .link-item .t{ font-size:13.5px; font-weight:600; }
+  .link-item .d{ font-size:11.5px; color:var(--ink-soft); }
+
+  /* Credits */
+  .credits-table{ margin-top:22px; width:100%; border-collapse:collapse; font-size:13.5px; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#191724; }
+  .credits-table tr:not(:last-child) td{ border-bottom:1px solid var(--line); }
+  .credits-table td{ padding:14px 18px; }
+  .credits-table td:first-child{ color:var(--ink-soft); width:36%; border-right:1px solid var(--line); font-size:10.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; }
+  .credits-table td:last-child{ font-weight:600; }
+  .todo-flag{ display:inline-block; margin-left:8px; font-size:10.5px; font-weight:700; color:var(--coral); border:1px solid var(--coral); border-radius:2px; padding:1px 6px; letter-spacing:0.04em; vertical-align:middle; }
+
+  /* Permission / disclaimer */
+  .disclaimer{
+    margin-top:22px; background:var(--paper); border-left:3px solid var(--violet); border-radius:0 6px 6px 0;
+    padding:20px 24px; font-size:13px; line-height:1.75; color:var(--ink-soft);
+  }
+  .disclaimer strong{ color:var(--ink); }
+
+  footer.page-foot{
+    background:var(--panel-dark-deep); color:rgba(255,255,255,0.5); text-align:center;
+    padding:22px 44px; font-size:11.5px; border-top:1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ---- Lightbox ---- */
+  .lb{
+    position:fixed; inset:0; z-index:2000; background:rgba(6,3,10,0.92);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+    touch-action:none;
+  }
+  .lb.is-open{ opacity:1; pointer-events:auto; }
+  .lb-track{
+    display:flex; height:100%; width:100%; will-change:transform;
+  }
+  .lb-track.is-dragging{ transition:none; }
+  .lb-track:not(.is-dragging){ transition:transform .3s cubic-bezier(.16,1,.3,1); }
+  .lb-slide{
+    flex:0 0 100%; height:100%; display:flex; align-items:center; justify-content:center;
+    padding:64px 24px; box-sizing:border-box;
+  }
+  .lb-slide img{
+    max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain;
+    border-radius:4px; user-select:none; -webkit-user-drag:none;
+  }
+  .lb-slide img.px-art{
+    width:100%; height:100%; max-width:100%; max-height:100%;
+    image-rendering:pixelated; image-rendering:-moz-crisp-edges; image-rendering:crisp-edges;
+  }
+  .lb-close{
+    position:absolute; top:20px; right:20px; z-index:2; width:42px; height:42px; border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.35); background:rgba(13,6,19,0.6); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer;
+    transition:border-color .2s, background .2s;
+  }
+  .lb-close:hover{ border-color:var(--coral); background:rgba(246,105,66,0.15); }
+  .lb-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+    width:46px; height:46px; border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.3); background:rgba(13,6,19,0.5); color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:border-color .2s, background .2s;
+  }
+  .lb-arrow svg{ width:18px; height:18px; }
+  .lb-arrow.prev{ left:20px; }
+  .lb-arrow.next{ right:20px; }
+  .lb-arrow:hover{ border-color:var(--coral); background:rgba(246,105,66,0.15); }
+  .lb-counter{
+    position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:2;
+    font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.75);
+    background:rgba(13,6,19,0.55); border:1px solid rgba(255,255,255,0.2);
+    padding:6px 14px; border-radius:20px; letter-spacing:0.02em;
+  }
+  .lb-caption{
+    position:absolute; bottom:56px; left:50%; transform:translateX(-50%); z-index:2;
+    font-size:13px; color:rgba(255,255,255,0.75); max-width:80%; text-align:center;
+  }
+  @media (max-width:640px){
+    .lb-arrow{ width:38px; height:38px; }
+    .lb-arrow.prev{ left:8px; } .lb-arrow.next{ right:8px; }
+    .lb-slide{ padding:80px 12px; }
+  }
+
+  @media (max-width:860px){
+    .topbar{ padding:16px 22px; }
+    .topbar-tag{ display:none; }
+    .topbar-dl span{ display:none; }
+    .topbar-dl{ padding:8px 10px; }
+    .hero{ padding:60px 22px 110px; }
+    .layout{ flex-direction:column; padding:80px 22px 0; gap:34px; }
+    .side{
+      position:fixed; top:0; left:0; height:100vh; width:84%; max-width:320px;
+      background:var(--paper); z-index:950; padding:88px 24px 28px; overflow-y:auto;
+      transform:translateX(-100%); transition:transform .3s ease;
+      box-shadow:24px 0 60px rgba(0,0,0,0.35);
+    }
+    .side.is-open{ transform:translateX(0); }
+    .side-nav{ flex-direction:column; }
+    .side-close{
+      display:flex; position:absolute; top:20px; right:20px; z-index:2;
+      width:36px; height:36px; border-radius:50%; align-items:center; justify-content:center;
+      border:1.5px solid var(--line); background:#191724; color:var(--ink-soft); font-size:18px; cursor:pointer;
+    }
+    .side-backdrop{
+      display:block; position:fixed; inset:0; background:rgba(6,3,10,0.55); z-index:940;
+      opacity:0; pointer-events:none; transition:opacity .3s ease;
+    }
+    .side-backdrop.is-open{ opacity:1; pointer-events:auto; }
+    .topbar-toggle{ display:flex; }
+    body.side-open{ overflow:hidden; }
+    .facts-grid{ grid-template-columns:repeat(2,1fr); }
+    .trailer-grid, .shot-grid{ grid-template-columns:repeat(2,1fr); }
+    .link-grid{ grid-template-columns:1fr; }
+    .about-row{ flex-direction:column; }
+    .stat-card{ width:100%; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{ transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-right">
+    <div class="topbar-tag">Press Kit</div>
+    <button class="topbar-toggle" id="topbarToggle" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+    <a class="topbar-dl" href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=drive_link"><i class="fa-solid fa-download"></i><span>Download full kit</span></a>
+  </div>
+</div>
+
+<header class="hero">
+  <img class="hero-title" src="assets/PressKit/+Title.png" alt="Pip Puzzle">
+  <p class="hero-sub">A competitive puzzle fighter where character-unique action skills and evolving, Sega Genesis–style stages turn match-three into a fight. Everything here is cleared for editorial use — logos, trailers, screenshots, and the facts.</p>
+  <div class="hero-badges">
+    <a class="hero-badge" href="https://store.steampowered.com/app/1858390/Pip_Puzzle/" target="_blank" rel="noopener" aria-label="Steam"><i class="fa-brands fa-steam"></i></a>
+    <a class="hero-badge" href="https://www.youtube.com/@PipGame" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a class="hero-badge" href="https://bsky.app/profile/pippuzzle.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
+    <a class="hero-badge" href="https://twitter.com/PipPuzzle" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- Side nav -->
+  <div class="side-backdrop" id="sideBackdrop"></div>
+  <aside class="side" id="sideNav">
+    <button class="side-close" id="sideClose" aria-label="Close menu">&times;</button>
+    <div class="side-logo"><img src="assets/PressKit/+Title.png" alt="Pip Puzzle"></div>
+    <div class="side-card">
+      <div class="k">Status</div>
+      <div class="v">Wishlist available</div>
+      <div class="k">Recognition</div>
+      <div class="v">EVO Indie Area 2025 &amp; 2026</div>
+    </div>
+    <nav class="side-nav">
+      <a href="#facts">Factsheet</a>
+      <a href="#about">About the game</a>
+      <a href="#press">Recognition</a>
+      <a href="#trailers">Trailers</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#logo">Logo &amp; icon</a>
+      <a href="#request">Request a copy</a>
+      <a href="#links">Additional links</a>
+      <a href="#credits">Credits</a>
+      <a href="#permission">Permission</a>
+    </nav>
+    <div class="side-social">
+      <div class="side-social-label">Website &amp; socials</div>
+      <div class="side-social-row">
+        <a href="https://store.steampowered.com/app/1858390/Pip_Puzzle/" target="_blank" rel="noopener" aria-label="Steam"><i class="fa-brands fa-steam"></i></a>
+        <a href="https://twitter.com/PipPuzzle" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://bsky.app/profile/pippuzzle.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky"><i class="fa-brands fa-bluesky"></i></a>
+        <a href="https://www.youtube.com/@PipGame" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+
+    <section class="block" id="facts">
+      <h2>Quick facts</h2>
+      <div class="facts-grid">
+        <div class="fact"><div class="k">Title</div><div class="v">Pip Puzzle</div></div>
+        <div class="fact"><div class="k">Genre</div><div class="v">Puzzle, Fighting</div></div>
+        <div class="fact"><div class="k">Modes</div><div class="v">Arcade, Story, Zen</div></div>
+        <div class="fact"><div class="k">Multiplayer</div><div class="v">Online &amp; local</div></div>
+        <div class="fact"><div class="k">Platform</div><div class="v">PC (Steam)</div></div>
+        <div class="fact"><div class="k">Release</div><div class="v">April 2027</div></div>
+        <div class="fact"><div class="k">Roster</div><div class="v">12 characters and counting</div></div>
+        <div class="fact"><div class="k">Stages</div><div class="v">20+, each evolving in real time</div></div>
+        <div class="fact"><div class="k">Feature</div><div class="v">Modding support</div></div>
+        <div class="fact"><div class="k">Accessibility</div><div class="v">Color-blind mode</div></div>
+        <div class="fact"><div class="k">Art-Style</div><div class="v">Sega Genesis/Mega Drive-styled</div></div>
+        <div class="fact"><div class="k">Website</div><div class="v"><a href="https://store.steampowered.com/app/1858390/Pip_Puzzle/" style="color:var(--coral);text-decoration:none;">Steam page ↗</a></div></div>
+      </div>
+    </section>
+
+    <section class="block" id="about">
+      <h2>About Pip Puzzle</h2>
+      <div class="about-row">
+        <p>Selected for EVO 2025+2026's Indie Game Devs Area, Pip Puzzle is a competitive puzzle fighter where matching gems with Trigger Gems destroys them and floods your opponent's board with junk.
+        Choose a character with a unique skill; from turning the screen black and white to dropping steel balls that destroy opponents' valuable gems—and battle through stages that evolve as the match unfolds.
+        Stages evolve visually and audibly as a match unfolds, with a Sega Genesis-style score that evolves into jazz, drum and bass, rock, etc. depending on who's losing. Play Arcade, Story, or Zen mode; solo, or against friends online and locally.</p>
+        <ul class="stat-card">
+          <li><span>Characters</span><b>12+</b></li>
+          <li><span>Stages</span><b>20+</b></li>
+          <li><span>Modes</span><b>Arcade / Story / Zen</b></li>
+          <li><span>Modding</span><b>Custom characters (inc. skills via dedicated language) &amp; stages</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block" id="press">
+      <h2>Recognition</h2>
+      <div class="accolade">
+        <i class="fa-solid fa-medal"></i>
+        <div>
+          <div class="t">Selected for EVO Indie Area 2025 + 2026</div>
+          <div class="d">Shown on the floor at the world's largest fighting game event, for two years running.</div>
+        </div>
+      </div>
+      <div class="accolade">
+        <i class="fa-solid fa-music"></i>
+        <div>
+          <div class="t">Soundtrack composed by SteelPlus</div>
+          <div class="d">Composer behind One Step From Eden and Rabbit &amp; Steel — the sound track shifts genre live depending on the stage as a player is losing. Not an award, but worth knowing.</div>
+        </div>
+      </div>
+      <div class="quote-empty">Outlet quotes and review coverage will be added here as we hear about them. Let us know if you've written about Pip Puzzle!</div>
+    </section>
+
+    <section class="block" id="trailers">
+      <h2>Trailers</h2>
+      <p class="lede">The latest video's shown first.</p>
+      <div class="trailer-grid">
+        <a class="trailer-card" href="https://www.youtube.com/watch?v=QUI3pw-3xwE" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/QUI3pw-3xwE/hqdefault.jpg" alt="">
+          <span class="play"><span><svg viewBox="0 0 10 10" fill="#fff"><polygon points="0,0 10,5 0,10"/></svg></span></span>
+          <span class="cap">CrossCode Trailer (PAX East 2026) — Lea reveal</span>
+        </a>
+        <a class="trailer-card" href="https://www.youtube.com/watch?v=LSAeOoKBGvg" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/LSAeOoKBGvg/hqdefault.jpg" alt="">
+          <span class="play"><span><svg viewBox="0 0 10 10" fill="#fff"><polygon points="0,0 10,5 0,10"/></svg></span></span>
+          <span class="cap">EVO Trailer (2025)</span>
+        </a>
+        <a class="trailer-card" href="https://www.youtube.com/watch?v=ZEp__7zFgU4" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/ZEp__7zFgU4/hqdefault.jpg" alt="">
+          <span class="play"><span><svg viewBox="0 0 10 10" fill="#fff"><polygon points="0,0 10,5 0,10"/></svg></span></span>
+          <span class="cap">Demo Reveal Trailer</span>
+        </a>
+        <a class="trailer-card" href="https://www.youtube.com/watch?v=3MA3xCVxKHw" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/3MA3xCVxKHw/hqdefault.jpg" alt="">
+          <span class="play"><span><svg viewBox="0 0 10 10" fill="#fff"><polygon points="0,0 10,5 0,10"/></svg></span></span>
+          <span class="cap">Tokyo Game Show Reveal Trailer (2024)</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="block" id="screenshots">
+      <h2>Screenshots</h2>
+      <p class="lede">A few screenshots of the game. Tap any image to preview — swipe or use the arrows to move between them.</p>
+      <div class="shot-grid" id="shotGrid">
+        <img src="assets/PressKit/Dystokia1.png" alt="The stage Dystokia" data-caption="The stage Dystokia">
+        <img src="assets/PressKit/IcyExcavation1.png" alt="The stage Icy Excavation, in its final atmosphere" data-caption="The stage Icy Excavation, in its final atmosphere">
+        <img src="assets/PressKit/PeacetimePrairies1.png" alt="The stage Peacetime Prairies" data-caption="The stage Peacetime Prairies">
+        <img src="assets/PressKit/SnowySkirmish1.png" alt="Screenshot of Snowy Skirmish" data-caption="Screenshot of Snowy Skirmish">
+        <img src="assets/PressKit/WispyWillows2.png" alt="The stage Wispy Willows" data-caption="The stage Wispy Willows">
+        <img class="px-art" src="assets/PressKit/Stages_LunaLobby_0.9_C6.gif" alt="Animated background of the stage Luna Lobby" data-caption="Animated background of the stage Luna Lobby">
+      </div>
+    </section>
+
+    <section class="block" id="logo">
+      <h2>Logo &amp; icon</h2>
+      <p class="lede">You can use the full wordmark at any size. Please, no recoloring, stretching, or extra effects.</p>
+      <div class="logo-row">
+        <div class="logo-card on-dark">
+          <div class="swatch"><img src="assets/PressKit/+Title.png" alt="Pip Puzzle logo on dark"></div>
+          <footer><span>On dark</span><a href="assets/PressKit/+Title.png" download>Download PNG</a></footer>
+        </div>
+        <div class="logo-card on-light">
+          <div class="swatch"><img src="assets/PressKit/+Title.png" alt="Pip Puzzle logo on light"></div>
+          <footer><span>On light</span><a href="assets/PressKit/+Title.png" download>Download PNG</a></footer>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="request">
+      <h2>Request press copy</h2>
+      <p class="lede">Covering Pip Puzzle? Send your outlet and a contact email, and we'll follow up with a review build!</p>
+      <div class="request-box">
+        <div>
+          <div style="font-family:var(--font-display);font-size:19px;text-transform:uppercase;">Press &amp; content creators welcome</div>
+          <p>We're happy to arrange keys ahead of showcases, EVO, or a video/stream feature.</p>
+        </div>
+        <a class="btn" href="#request-form">Request a copy</a>
+      </div>
+      <form class="req-form" id="request-form" action="https://formspree.io/f/mvkowbza" method="POST">
+        <input type="hidden" name="subject" value="Press copy request">
+        <input type="text" name="outlet" placeholder="Outlet / channel name" required>
+        <input type="email" name="email" placeholder="Contact email" required>
+        <button class="btn" type="submit">Send request</button>
+      </form>
+      <p class="req-note">You can also reach us directly on <a href="https://twitter.com/PipPuzzle" style="color:var(--coral);">Twitter/X</a> or <a href="https://bsky.app/profile/pippuzzle.bsky.social" style="color:var(--coral);">Bluesky</a>.</p>
+    </section>
+
+    <section class="block" id="links">
+      <h2>Additional links</h2>
+      <div class="link-grid">
+        <a class="link-item" href="https://store.steampowered.com/app/1858390/Pip_Puzzle/" target="_blank" rel="noopener">
+          <i class="fa-brands fa-steam"></i>
+          <div><div class="t">Wishlist on Steam</div><div class="d">Get notified at launch</div></div>
+        </a>
+        <a class="link-item" href="https://drive.google.com/drive/folders/14BOX_dxDKj8XMXzJ-PiaGz_Hzmvs5gUY?usp=drive_link">
+          <i class="fa-solid fa-file-zipper"></i>
+          <div><div class="t">Full press kit (.zip)</div><div class="d">Logos, art, screenshots</div></div>
+        </a>
+        <a class="link-item" href="https://twitter.com/PipPuzzle" target="_blank" rel="noopener">
+          <i class="fa-brands fa-x-twitter"></i>
+          <div><div class="t">Twitter / X</div><div class="d">@PipPuzzle</div></div>
+        </a>
+        <a class="link-item" href="https://bsky.app/profile/pippuzzle.bsky.social" target="_blank" rel="noopener">
+          <i class="fa-brands fa-bluesky"></i>
+          <div><div class="t">Bluesky</div><div class="d">@pippuzzle.bsky.social</div></div>
+        </a>
+        <a class="link-item" href="https://www.youtube.com/@PipGame" target="_blank" rel="noopener">
+          <i class="fa-brands fa-youtube"></i>
+          <div><div class="t">YouTube</div><div class="d">Trailers &amp; footage</div></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="block" id="credits">
+      <h2>Credits</h2>
+      <table class="credits-table">
+        <tr><td>Design &amp; animation</td><td><a href="https://x.com/PipPuzzle">Ben Woodhouse</a></td></tr>
+        <tr><td>Development</td><td><a href="https://x.com/thirdwheeldev">ThirdWheelDev</a></td></tr>
+        <tr><td>Music &amp; sound</td><td><a href="https://x.com/STEEL_PLUS">SteelPlus</a></td></tr>
+        <tr><td>Character Illustration</td><td><a href="https://x.com/310_Suzaki">Suzaki</a></td></tr>
+        <tr><td>Press contact</td><td><a href="https://pippuzzle.com">Ben Woodhouse</a></td></tr>
+      </table>
+    </section>
+
+    <section class="block" id="permission" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">
+      <h2>Permission &amp; disclaimer</h2>
+      <div class="disclaimer">
+        <strong>All logos, artwork, screenshots, and video on this page may be used for editorial coverage of Pip Puzzle;</strong> reviews, previews, videos, streams, etc. Please don't alter or recolor the logo. Assets are provided as-is; use them at your own discretion. For anything not covered here, you can use the request form above.
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="page-foot">© 2026 Pip Puzzle. Indie Puzzle Fighting Game.</footer>
+
+<!-- Lightbox -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button class="lb-close" id="lbClose" aria-label="Close preview">&times;</button>
+  <button class="lb-arrow prev" id="lbPrev" aria-label="Previous image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="lb-track" id="lbTrack"></div>
+  <button class="lb-arrow next" id="lbNext" aria-label="Next image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="lb-caption" id="lbCaption"></div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script>
+  (function(){
+    var side = document.getElementById('sideNav');
+    var backdrop = document.getElementById('sideBackdrop');
+    var toggle = document.getElementById('topbarToggle');
+    var close = document.getElementById('sideClose');
+    function openSide(){
+      side.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      document.body.classList.add('side-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    function closeSide(){
+      side.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      document.body.classList.remove('side-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    toggle.addEventListener('click', openSide);
+    close.addEventListener('click', closeSide);
+    backdrop.addEventListener('click', closeSide);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSide(); });
+    side.querySelectorAll('.side-nav a').forEach(function(a){
+      a.addEventListener('click', closeSide);
+    });
+  })();
+
+  (function(){
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.side-nav a'));
+    var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    function setActive(id){
+      navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+    }
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        var visible = entries.filter(function(e){ return e.isIntersecting; });
+        if(visible.length){
+          visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+          setActive(visible[0].target.id);
+        }
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function(s){ io.observe(s); });
+    }
+    if(sections.length) setActive(sections[0].id);
+  })();
+
+  /* ---- Lightbox: click to open, swipe/arrow to move, swipe-down or tap-out to dismiss ---- */
+  (function(){
+    var grid = document.getElementById('shotGrid');
+    if(!grid) return;
+    var imgs = Array.prototype.slice.call(grid.querySelectorAll('img'));
+    if(!imgs.length) return;
+
+    var lb = document.getElementById('lightbox');
+    var track = document.getElementById('lbTrack');
+    var counter = document.getElementById('lbCounter');
+    var caption = document.getElementById('lbCaption');
+    var btnClose = document.getElementById('lbClose');
+    var btnPrev = document.getElementById('lbPrev');
+    var btnNext = document.getElementById('lbNext');
+
+    var index = 0;
+    var viewportW = window.innerWidth;
+    var isOpen = false;
+
+    // Build slides once
+    imgs.forEach(function(img){
+      var slide = document.createElement('div');
+      slide.className = 'lb-slide';
+      var full = document.createElement('img');
+      full.src = img.getAttribute('src');
+      full.alt = img.getAttribute('alt') || '';
+      full.className = img.className;
+      slide.appendChild(full);
+      track.appendChild(slide);
+    });
+
+    function updateChrome(){
+      counter.textContent = (index + 1) + ' / ' + imgs.length;
+      caption.textContent = imgs[index].getAttribute('data-caption') || imgs[index].getAttribute('alt') || '';
+      btnPrev.style.visibility = imgs.length > 1 ? 'visible' : 'hidden';
+      btnNext.style.visibility = imgs.length > 1 ? 'visible' : 'hidden';
+    }
+
+    function goTo(i, animate){
+      index = Math.max(0, Math.min(imgs.length - 1, i));
+      track.classList.toggle('is-dragging', !animate);
+      track.style.transform = 'translate3d(' + (-index * viewportW) + 'px,0,0)';
+      updateChrome();
+    }
+
+    function open(i){
+      viewportW = window.innerWidth;
+      isOpen = true;
+      lb.classList.add('is-open');
+      document.body.classList.add('side-open');
+      goTo(i, false);
+      // force reflow then allow transition for subsequent goTo calls
+      requestAnimationFrame(function(){ track.classList.remove('is-dragging'); });
+    }
+
+    function closeLb(){
+      isOpen = false;
+      lb.classList.remove('is-open');
+      document.body.classList.remove('side-open');
+    }
+
+    imgs.forEach(function(img, i){
+      img.addEventListener('click', function(){ open(i); });
+    });
+
+    btnClose.addEventListener('click', closeLb);
+    btnPrev.addEventListener('click', function(){ if(index > 0) goTo(index - 1, true); });
+    btnNext.addEventListener('click', function(){ if(index < imgs.length - 1) goTo(index + 1, true); });
+
+    lb.addEventListener('click', function(e){
+      if(e.target === lb) closeLb();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(!isOpen) return;
+      if(e.key === 'Escape') closeLb();
+      else if(e.key === 'ArrowLeft' && index > 0) goTo(index - 1, true);
+      else if(e.key === 'ArrowRight' && index < imgs.length - 1) goTo(index + 1, true);
+    });
+
+    window.addEventListener('resize', function(){
+      viewportW = window.innerWidth;
+      if(isOpen) goTo(index, false);
+    });
+
+    // Touch / pointer swipe: horizontal = change image, vertical drag = dismiss
+    var startX = 0, startY = 0, curX = 0, curY = 0, dragging = false, axis = null;
+
+    function onStart(x, y){
+      if(!isOpen) return;
+      dragging = true; axis = null;
+      startX = x; startY = y; curX = x; curY = y;
+      track.classList.add('is-dragging');
+    }
+    function onMove(x, y){
+      if(!dragging) return;
+      curX = x; curY = y;
+      var dx = curX - startX, dy = curY - startY;
+      if(axis === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)){
+        axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+      if(axis === 'x'){
+        var base = -index * viewportW;
+        track.style.transform = 'translate3d(' + (base + dx) + 'px,0,0)';
+      } else if(axis === 'y'){
+        var damp = dy * 0.9;
+        track.style.transform = 'translate3d(' + (-index * viewportW) + 'px,' + damp + 'px,0)';
+        lb.style.background = 'rgba(6,3,10,' + Math.max(0.4, 0.92 - Math.abs(damp) / 400) + ')';
+      }
+    }
+    function onEnd(){
+      if(!dragging) return;
+      dragging = false;
+      var dx = curX - startX, dy = curY - startY;
+      if(axis === 'x'){
+        var threshold = viewportW * 0.18;
+        if(dx < -threshold && index < imgs.length - 1) goTo(index + 1, true);
+        else if(dx > threshold && index > 0) goTo(index - 1, true);
+        else goTo(index, true);
+      } else if(axis === 'y'){
+        if(Math.abs(dy) > 110){
+          closeLb();
+        } else {
+          track.classList.remove('is-dragging');
+          track.style.transform = 'translate3d(' + (-index * viewportW) + 'px,0,0)';
+        }
+        lb.style.background = '';
+      } else {
+        goTo(index, true);
+      }
+      axis = null;
+    }
+
+    lb.addEventListener('touchstart', function(e){ var t = e.touches[0]; onStart(t.clientX, t.clientY); }, {passive:true});
+    lb.addEventListener('touchmove', function(e){ var t = e.touches[0]; onMove(t.clientX, t.clientY); }, {passive:true});
+    lb.addEventListener('touchend', onEnd);
+
+    var mouseDown = false;
+    lb.addEventListener('mousedown', function(e){
+      if(e.target.closest('.lb-close, .lb-arrow')) return;
+      mouseDown = true; onStart(e.clientX, e.clientY);
+    });
+    window.addEventListener('mousemove', function(e){ if(mouseDown) onMove(e.clientX, e.clientY); });
+    window.addEventListener('mouseup', function(){ if(mouseDown){ mouseDown = false; onEnd(); } });
+  })();
+</script>
+
+</body>
+</html>
